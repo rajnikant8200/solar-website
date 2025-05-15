@@ -1,0 +1,33 @@
+.header1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Space out the logo and logout button */
+  align-items: center;
+  background: #2c3e50;
+  padding: 10px 1px; /* Enough space on both sides */
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.logout-btn {
+  padding: 8px 16px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.content {
+  margin-left: 250px; /* Sidebar or navigation space */
+  padding: 20px;
+}

@@ -1,0 +1,58 @@
+.working-process-section {
+    background-image: url('https://media.istockphoto.com/id/908540158/photo/sunset-sky-star-background-light-sunrise-nature-for-design.jpg?s=612x612&w=0&k=20&c=wC9FL8fwc0-04NMoTLLHzXLXZ33JNKLwoPNQwGkn8Xg=');
+    background-size: cover;
+    background-position: center;
+    padding: 60px 20px;
+    color: white;
+    text-align: center;
+  }
+  
+  .heading h2 {
+    color: #ffd700;
+    font-size: 18px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  
+  .heading h1 {
+    font-size: 36px;
+    font-weight: bold;
+    margin-bottom: 15px;
+  }
+  
+  .heading p {
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .working-process-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 40px;
+  }
+  
+  .working-process-item {
+    flex: 1 1 200px;
+    max-width: 280px;
+  }
+  
+  .working-process-item .icon {
+    color: #ffd700;
+    margin-bottom: 10px;
+  }
+  
+  .working-process-item h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .working-process-item p {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  

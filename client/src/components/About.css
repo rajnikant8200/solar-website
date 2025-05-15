@@ -1,0 +1,54 @@
+.about {
+  padding: 60px 10%;
+  background-color: #e1dddd;
+}
+
+.about h4 {
+  color: #00c49a;
+  margin-bottom: 10px;
+}
+
+.about h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.about h2 span {
+  color: #00c49a;
+}
+
+.about-content {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-start;
+}
+
+.about-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.about-text p {
+  margin-bottom: 15px;
+  color: #444;
+}
+
+.about-icons div {
+  margin-top: 10px;
+  font-size: 1rem;
+}
+
+.about-images {
+  flex: 1;
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.about-images img {
+  width: 100%;
+  border-radius: 10px;
+  object-fit: cover;
+}
