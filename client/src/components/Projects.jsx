@@ -11,7 +11,6 @@ const Projects = () => {
     name: '',
     type: '',
     date: '',
-    code: '',
     kw: '',
     status: 'preQualified'
   });
@@ -111,7 +110,6 @@ const Projects = () => {
           name: '',
           type: '',
           date: '',
-          code: '',
           kw: '',
           status: 'preQualified'
         });
@@ -167,10 +165,11 @@ const Projects = () => {
         </div>
 
         <div className="columns-container">
-          <ProjectColumn title="Pre Qualified" projects={filterProjects(data.preQualified)} onProjectClick={handleEditClick} />
           <ProjectColumn title="Enquiry" projects={filterProjects(data.enquiry)} onProjectClick={handleEditClick} />
           <ProjectColumn title="Quotation" projects={filterProjects(data.quotation)} onProjectClick={handleEditClick} />
           <ProjectColumn title="Design" projects={filterProjects(data.design)} onProjectClick={handleEditClick} />
+          <ProjectColumn title="Complete" projects={filterProjects(data.preQualified)} onProjectClick={handleEditClick} />
+
         </div>
 
         {loading && <div className="loading">Loading...</div>}
@@ -187,10 +186,10 @@ const Projects = () => {
                     onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                     required
                   >
-                    <option value="preQualified">Pre Qualified</option>
                     <option value="enquiry">Enquiry</option>
                     <option value="quotation">Quotation</option>
                     <option value="design">Design</option>
+                    <option value="preQualified">Complete</option>
                   </select>
                 </>
               ) : (
@@ -218,12 +217,7 @@ const Projects = () => {
                     onChange={(e) => setFormData({ ...formData, date: e.target.value })}
                     required
                   />
-                  <input
-                    placeholder="Code"
-                    value={formData.code}
-                    onChange={(e) => setFormData({ ...formData, code: e.target.value })}
-                    required
-                  />
+                 
                   <input
                     type="number"
                     placeholder="KW"
@@ -236,10 +230,12 @@ const Projects = () => {
                     onChange={(e) => setFormData({ ...formData, status: e.target.value })}
                     required
                   >
-                    <option value="preQualified">Pre Qualified</option>
+                   
                     <option value="enquiry">Enquiry</option>
                     <option value="quotation">Quotation</option>
                     <option value="design">Design</option>
+                    <option value="preQualified">Complete</option>
+
                   </select>
                 </>
               )}
