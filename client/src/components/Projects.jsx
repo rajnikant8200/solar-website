@@ -12,6 +12,7 @@ const Projects = () => {
     type: '',
     date: '',
     kw: '',
+    contact: '',
     status: 'preQualified'
   });
   const [editingProject, setEditingProject] = useState(null);
@@ -57,6 +58,11 @@ const Projects = () => {
   const handleEditClick = (project) => {
     setEditingProject(project);
     setFormData({
+      name: project.name,
+      type: project.type,
+      date: project.date.split('T')[0],
+      kw: project.kw,
+      contact: project.contact || '',
       status: project.status
     });
     setShowForm(true);
@@ -65,8 +71,9 @@ const Projects = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    if (!formData.status) {
-      setError('Status is required!');
+    const { name, type, date, kw, contact, status } = formData;
+    if (!name || !type || !date || !kw || !contact || !status) {
+      setError('All fields are required!');
       return;
     }
 
@@ -79,11 +86,11 @@ const Projects = () => {
     }
 
     const payload = editingProject
-      ? { status: formData.status }
+      ? { name, type, date, kw, contact, status }
       : {
           ...formData,
           code: newCode,
-          date: formData.date.split('T')[0]
+          date: date.split('T')[0]
         };
 
     const request = editingProject
@@ -111,6 +118,7 @@ const Projects = () => {
           type: '',
           date: '',
           kw: '',
+          contact: '',
           status: 'preQualified'
         });
         fetchData();
@@ -158,6 +166,14 @@ const Projects = () => {
           />
           <button className="add-project-btn" onClick={() => {
             setEditingProject(null);
+            setFormData({
+              name: '',
+              type: '',
+              date: '',
+              kw: '',
+              contact: '',
+              status: 'preQualified'
+            });
             setShowForm(true);
           }}>
             + Add Project
@@ -169,7 +185,6 @@ const Projects = () => {
           <ProjectColumn title="Quotation" projects={filterProjects(data.quotation)} onProjectClick={handleEditClick} />
           <ProjectColumn title="Design" projects={filterProjects(data.design)} onProjectClick={handleEditClick} />
           <ProjectColumn title="Complete" projects={filterProjects(data.preQualified)} onProjectClick={handleEditClick} />
-
         </div>
 
         {loading && <div className="loading">Loading...</div>}
@@ -178,67 +193,54 @@ const Projects = () => {
         {showForm && (
           <div className="modal">
             <form className="project-form" onSubmit={handleSubmit}>
-              {editingProject ? (
-                <>
-                  <h3>Edit Project Status</h3>
-                  <select
-                    value={formData.status}
-                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                    required
-                  >
-                    <option value="enquiry">Enquiry</option>
-                    <option value="quotation">Quotation</option>
-                    <option value="design">Design</option>
-                    <option value="preQualified">Complete</option>
-                  </select>
-                </>
-              ) : (
-                <>
-                  <h3>Add Project</h3>
-                  <input
-                    placeholder="Name"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    required
-                  />
-                  <select
-                    value={formData.type}
-                    onChange={(e) => setFormData({ ...formData, type: e.target.value })}
-                    required
-                  >
-                    <option value="">Select Type</option>
-                    <option value="commercial">Commercial</option>
-                    <option value="industrial">Industrial</option>
-                    <option value="residential">Residential</option>
-                  </select>
-                  <input
-                    type="date"
-                    value={formData.date}
-                    onChange={(e) => setFormData({ ...formData, date: e.target.value })}
-                    required
-                  />
-                 
-                  <input
-                    type="number"
-                    placeholder="KW"
-                    value={formData.kw}
-                    onChange={(e) => setFormData({ ...formData, kw: e.target.value })}
-                    required
-                  />
-                  <select
-                    value={formData.status}
-                    onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                    required
-                  >
-                   
-                    <option value="enquiry">Enquiry</option>
-                    <option value="quotation">Quotation</option>
-                    <option value="design">Design</option>
-                    <option value="preQualified">Complete</option>
+              <h3>{editingProject ? 'Edit Project' : 'Add Project'}</h3>
+              <input
+                placeholder="Name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                required
+              />
+              <select
+                value={formData.type}
+                onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+                required
+              >
+                <option value="">Select Type</option>
+                <option value="commercial">Commercial</option>
+                <option value="industrial">Industrial</option>
+                <option value="residential">Residential</option>
+              </select>
+              <input
+                type="date"
+                value={formData.date}
+                onChange={(e) => setFormData({ ...formData, date: e.target.value })}
+                required
+              />
+              <input
+                type="number"
+                placeholder="KW"
+                value={formData.kw}
+                onChange={(e) => setFormData({ ...formData, kw: e.target.value })}
+                required
+              />
+              <input
+                type="text"
+                placeholder="Contact"
+                value={formData.contact}
+                onChange={(e) => setFormData({ ...formData, contact: e.target.value })}
+                required
+              />
+              <select
+                value={formData.status}
+                onChange={(e) => setFormData({ ...formData, status: e.target.value })}
+                required
+              >
+                <option value="enquiry">Enquiry</option>
+                <option value="quotation">Quotation</option>
+                <option value="design">Design</option>
+                <option value="preQualified">Complete</option>
+              </select>
 
-                  </select>
-                </>
-              )}
               <div className="form-buttons">
                 {editingProject ? (
                   <>

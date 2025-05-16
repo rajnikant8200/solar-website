@@ -2,13 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 
-// Project Schema
+// ✅ Updated Project Schema (removed `code`, added `contact`)
 const projectSchema = new mongoose.Schema({
   name: { type: String, required: true },
   type: { type: String, required: true },
   date: { type: Date, required: true },
-  code: { type: String, required: true },
   kw: { type: Number, required: true },
+  contact: { type: String, required: true }, // ✅ New field
   status: { type: String, required: true }
 });
 
@@ -28,14 +28,14 @@ router.get('/', async (req, res) => {
 
 // POST /api/projects - Add a new project
 router.post('/', async (req, res) => {
-  const { name, type, date, code, kw, status } = req.body;
+  const { name, type, date, kw, contact, status } = req.body;
 
-  if (!name || !type || !date || !code || !kw || !status) {
+  if (!name || !type || !date || !kw || !contact || !status) {
     return res.status(400).json({ message: 'All fields are required' });
   }
 
   try {
-    const newProject = new Project({ name, type, date, code, kw, status });
+    const newProject = new Project({ name, type, date, kw, contact, status });
     await newProject.save();
     res.status(201).json({ message: '✅ Project added successfully' });
   } catch (err) {
@@ -44,18 +44,18 @@ router.post('/', async (req, res) => {
   }
 });
 
-// PUT /api/projects/:id - Update project status
+// PUT /api/projects/:id - Update project
 router.put('/:id', async (req, res) => {
-  const { status } = req.body;
+  const { name, type, date, kw, contact, status } = req.body;
 
-  if (!status) {
-    return res.status(400).json({ message: 'Status is required' });
+  if (!name || !type || !date || !kw || !contact || !status) {
+    return res.status(400).json({ message: 'All fields are required' });
   }
 
   try {
     const updatedProject = await Project.findByIdAndUpdate(
       req.params.id,
-      { status },
+      { name, type, date, kw, contact, status },
       { new: true }
     );
 
@@ -63,7 +63,7 @@ router.put('/:id', async (req, res) => {
       return res.status(404).json({ message: 'Project not found' });
     }
 
-    res.json({ message: '✅ Project status updated', project: updatedProject });
+    res.json({ message: '✅ Project updated successfully', project: updatedProject });
   } catch (err) {
     console.error('❌ Error updating project:', err);
     res.status(500).json({ message: 'Server error' });
@@ -73,8 +73,7 @@ router.put('/:id', async (req, res) => {
 // DELETE /api/projects/:id - Delete a project
 router.delete('/:id', async (req, res) => {
   try {
-    const projectId = req.params.id;
-    const deleted = await Project.findByIdAndDelete(projectId);
+    const deleted = await Project.findByIdAndDelete(req.params.id);
     if (!deleted) {
       return res.status(404).json({ message: 'Project not found' });
     }
