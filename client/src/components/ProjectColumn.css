@@ -61,3 +61,27 @@
   color: #003366;
   font-weight: bold;
 }
+
+.card-type-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  display: inline-block;
+  margin-top: 8px;
+  text-transform: capitalize;
+}
+
+
+.card-type-badge.commercial {
+  background-color: #1976d2; 
+}
+
+.card-type-badge.industrial {
+  background-color: #d32f2f; 
+}
+
+.card-type-badge.residential {
+  background-color: #388e3c; 
+}

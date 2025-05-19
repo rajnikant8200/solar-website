@@ -2,13 +2,13 @@ const express = require('express');
 const mongoose = require('mongoose');
 const router = express.Router();
 
-// ✅ Updated Project Schema (removed `code`, added `contact`)
+
 const projectSchema = new mongoose.Schema({
   name: { type: String, required: true },
   type: { type: String, required: true },
   date: { type: Date, required: true },
   kw: { type: Number, required: true },
-  contact: { type: String, required: true }, // ✅ New field
+  contact: { type: String, required: true }, 
   status: { type: String, required: true }
 });
 
@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
     const projects = await Project.find();
     res.json(projects);
   } catch (err) {
-    console.error('❌ Error fetching projects:', err);
+    console.error(' Error fetching projects:', err);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -37,9 +37,9 @@ router.post('/', async (req, res) => {
   try {
     const newProject = new Project({ name, type, date, kw, contact, status });
     await newProject.save();
-    res.status(201).json({ message: '✅ Project added successfully' });
+    res.status(201).json({ message: ' Project added successfully' });
   } catch (err) {
-    console.error('❌ Error saving project:', err);
+    console.error(' Error saving project:', err);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -63,9 +63,9 @@ router.put('/:id', async (req, res) => {
       return res.status(404).json({ message: 'Project not found' });
     }
 
-    res.json({ message: '✅ Project updated successfully', project: updatedProject });
+    res.json({ message: ' Project updated successfully', project: updatedProject });
   } catch (err) {
-    console.error('❌ Error updating project:', err);
+    console.error(' Error updating project:', err);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -77,9 +77,9 @@ router.delete('/:id', async (req, res) => {
     if (!deleted) {
       return res.status(404).json({ message: 'Project not found' });
     }
-    res.status(200).json({ message: '✅ Project deleted successfully' });
+    res.status(200).json({ message: ' Project deleted successfully' });
   } catch (error) {
-    console.error('❌ Error deleting project:', error);
+    console.error(' Error deleting project:', error);
     res.status(500).json({ message: 'Error deleting project', error });
   }
 });

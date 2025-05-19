@@ -23,8 +23,8 @@ const mongoURI = 'mongodb+srv://rajnikanthirpara8200:meetrajni@cluster1.jlxmhzu.
 mongoose.connect(mongoURI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-}).then(() => console.log('✅ Connected to MongoDB Atlas'))
-  .catch((err) => console.error('❌ MongoDB connection error:', err));
+}).then(() => console.log(' Connected to MongoDB Atlas'))
+  .catch((err) => console.error(' MongoDB connection error:', err));
 
 
 const userSchema = new mongoose.Schema({
@@ -53,7 +53,7 @@ app.use('/api/tasks', tasksRouter);
 
 // Base test route
 app.get('/', (req, res) => {
-  res.send('✅ API is running...');
+  res.send(' API is running...');
 });
 
 // Register Route
@@ -68,9 +68,9 @@ app.post('/register', async (req, res) => {
   try {
     const newUser = new User({ username, email, password });
     await newUser.save();
-    res.json({ message: '✅ User registered successfully' });
+    res.json({ message: ' User registered successfully' });
   } catch (err) {
-    console.error('❌ Error saving user:', err);
+    console.error(' Error saving user:', err);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -92,7 +92,7 @@ app.post('/login', async (req, res) => {
 
     res.json({ success: true, message: 'Login successful' });
   } catch (err) {
-    console.error('❌ Login error:', err);
+    console.error(' Login error:', err);
     res.status(500).json({ success: false, message: 'Server error' });
   }
 });
@@ -122,7 +122,7 @@ app.put('/user/settings', upload.single('profilePicture'), async (req, res) => {
     await user.save();
     res.json({ message: 'Settings updated successfully' });
   } catch (err) {
-    console.error('❌ Error updating settings:', err);
+    console.error(' Error updating settings:', err);
     res.status(500).json({ message: 'Server error' });
   }
 });
@@ -130,5 +130,5 @@ app.put('/user/settings', upload.single('profilePicture'), async (req, res) => {
 // Start Server
 const PORT = 5000;
 app.listen(PORT, () => {
-  console.log(`🚀 Server is running on port ${PORT}`);
+  console.log(` Server is running on port ${PORT}`);
 });
